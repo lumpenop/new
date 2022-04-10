@@ -43,6 +43,7 @@ const ToggleText = styled.li`
     list-style: none;
     line-height: 30px;
     cursor: pointer;
+    user-select: none;
 
     &.toggle--checked{
         opacity: 0.4;

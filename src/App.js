@@ -14,6 +14,14 @@ function App() {
           <h3>Toggle</h3>
           <Toggle />
       </Section>
+      <Section>
+        <h3>Tab</h3>
+        <Tab />
+      </Section>
+      <Section>
+        <h3>Input</h3>
+        <Input />
+      </Section>
     </>
   );
 }
@@ -24,7 +32,7 @@ const Section = styled.section`
   margin: 0 auto;
   height: 200px;
   border: 0.5px solid #acacac;
-  
+  margin-bottom: 10px;
 `
 
 export default App;
