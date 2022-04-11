@@ -107,6 +107,7 @@ const Select = styled.input.attrs({
 
 `
 const OptionBox = styled.ul`
+
     width: 100%;
     height: 0;
     display: none;
