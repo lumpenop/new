@@ -21,7 +21,7 @@ const Toggle = () =>{
                     className={`${clicked ? 'toggle--checked' : ''}`}
                 >기본</ToggleText>
                 <ToggleText
-                    className={`${clicked ? '' : 'toggle--checked'}`}
+                    className={`${!clicked ? 'toggle--checked' : ''}`}
                 >상세</ToggleText>
                 </ToggleTextBox>
             </ToggleContainer>

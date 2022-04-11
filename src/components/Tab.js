@@ -57,6 +57,7 @@ const TabLi = styled.li`
     text-align: center;
     box-sizing: border-box;
     border-width: 0;
+    user-select: none;
 `
 
 const TabUl = styled.ul`
