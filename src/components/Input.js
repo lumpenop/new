@@ -2,7 +2,7 @@ import React, {useState} from 'react';
 import styled from 'styled-components';
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faCheck, faEyeSlash } from "@fortawesome/free-solid-svg-icons";
-import { isVisible } from '@testing-library/user-event/dist/utils';
+
 
 const Input = () =>{ 
 
@@ -11,7 +11,7 @@ const Input = () =>{
     const [isVisible, setIsVisible] = useState(false);
 
     const eyesClick = () =>{
-        isVisible?setIsVisible(()=>false):setIsVisible(()=>true);
+        isVisible?setIsVisible(false):setIsVisible(true);
     }
     
     const emailCheck = (e) =>{
@@ -59,15 +59,13 @@ const Email = styled.input.attrs({
     }
 `;
 
-
-
 const TextBox = styled.div`
     color: #ababab;
     font-size: 12px;
 `
 
 const InputContainer = styled.div`
-    width: 60%;
+    width: 50%;
     margin: 0 auto;
 `
 
@@ -79,6 +77,7 @@ const InputBox = styled.div`
     margin-bottom: 10px;
 
     > .password{
+        width: 84%;
         border: none;
         outline: none;
     }
@@ -89,13 +88,5 @@ const InputBox = styled.div`
         border-radius: 30px;
     }
 `
-
-
-
-
-
-
-
-
 
 export default Input;

@@ -22,6 +22,10 @@ function App() {
         <h3>Input</h3>
         <Input />
       </Section>
+      <Section style={{height: '310px'}}>
+        <h3>Dropdown</h3>
+        <Dropdown />
+      </Section>
     </>
   );
 }
