@@ -1,6 +1,10 @@
 import React, {useState, useRef} from 'react';
 import styled from 'styled-components';
 
+const arrPer = [
+    1, 25, 50, 75, 100
+]
+
 const Slider = ({isClicked, setIsClicked}) =>{
 
     const [barWidth, setBarWidth] = useState(30);
@@ -8,8 +12,8 @@ const Slider = ({isClicked, setIsClicked}) =>{
 
 
     const forResult =(result)=>{
-        if(result<0){
-            return 0;
+        if(result<1){
+            return 1;
         }else if(result>100){
             return 100;
         }else{
@@ -50,12 +54,28 @@ const Slider = ({isClicked, setIsClicked}) =>{
                         <SliderBarBase
                             onMouseDown={sliderMouseDown}
                         >
+                            {arrPer.map(e=>{
+                                return <SliderBaseCircle 
+                                        per={e}
+                                        className={`${ e<=barWidth ?'skyblue':''}`}
+                                    />
+                            })}
                             <SliderBar barWidth={barWidth}>
                                 <SliderSwitch>
                                     <SliderCircle />
                                 </SliderSwitch>
                             </SliderBar>
+                            
                         </SliderBarBase>
+                      
+                        {arrPer.map(el=>{
+                            return <Button 
+                                    per={el} 
+                                    value={`${el}%`}
+                                    onClick={()=>setBarWidth(el)}
+                                />
+                        })}
+                      
                     </SliderBox>
                 </SliderContainer>
             </Container>
@@ -96,6 +116,7 @@ const StateBox = styled.div`
 
 const SliderBox = styled.div`
     display: block;
+    position: relative;
     width: 100%;
     height: 90px;
     line-height: 90px;
@@ -140,6 +161,35 @@ const SliderCircle = styled.div`
     height: 15px;
     border-radius: 15px;
     background-color: skyblue;
+`
+
+const SliderBaseCircle = styled.div`
+    background-color: #ececec;
+    width: 15px;
+    height: 15px;
+    border-radius: 15px;
+    left: ${props=>props.per}%;
+    top: 50%;
+    transform: translate(-50%, -50%);
+    position: absolute;
+    outline: none;
+
+    &.skyblue{
+        background-color: skyblue;
+    }
+`
+
+const Button = styled.input.attrs({
+    type: 'button',
+})` 
+    position: absolute;
+    padding:0;
+    width: 40px;
+    border-radius: 15px;
+    border: none;
+    bottom: 0;
+    left: ${props=>props.per}%;
+    transform: translate(-50%, -60%);
 `
 
 
