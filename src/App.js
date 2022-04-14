@@ -22,9 +22,13 @@ function App() {
         <h3>Input</h3>
         <Input />
       </Section>
-      <Section style={{height: '310px'}}>
+      <Section id='dropdown'>
         <h3>Dropdown</h3>
         <Dropdown />
+      </Section>
+      <Section>
+        <h3>Slider</h3>
+        <Slider />
       </Section>
     </>
   );
@@ -37,6 +41,10 @@ const Section = styled.section`
   height: 200px;
   border: 0.5px solid #acacac;
   margin-bottom: 10px;
+
+  &#dropdown{
+    height: 310px;
+  }
 `
 
 export default App;
