@@ -32,13 +32,15 @@ const Dropdown = () =>{
         if(text===''){
             setMenuList(dropMenus);
         }else{
-            const newList = menuList.filter(e=>{
+            const AllSymbols = menuList[0];
+            const anotherMenu = menuList.slice(1);
+
+            const newList = anotherMenu.filter(e=>{
                 return e.toLowerCase().includes(text.toLowerCase());
             })
-    
-            if(newList.length!==0){
-                setMenuList(newList);
-            }
+            
+            setMenuList([AllSymbols, ...newList]);
+           
         }
     }
     
