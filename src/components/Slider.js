@@ -1,57 +1,87 @@
 import React, {useState, useRef} from 'react';
 import styled from 'styled-components';
 
-const Slider = () =>{
+const Slider = ({isClicked, setIsClicked}) =>{
 
     const [barWidth, setBarWidth] = useState(30);
     const widthRef = useRef();
 
-    const sliderClick =(e)=>{
-        console.log(e.target);
-        const mouseX = e.nativeEvent.offsetX;
-        const sliderWidth = widthRef.current.offsetWidth;
-        const sliderBarPer = parseInt(Math.round(mouseX/sliderWidth*100));
-        console.log(sliderBarPer);
-        setBarWidth(sliderBarPer);
+
+    const forResult =(result)=>{
+        if(result<0){
+            return 0;
+        }else if(result>100){
+            return 100;
+        }else{
+            return result;
+        }
     }
+    const sliderMoving =(e)=>{
+        const sliderWidth = widthRef.current.offsetWidth;
+        const mouseX = e.nativeEvent.pageX;
+        const mouse = mouseX - (window.outerWidth/2 - sliderWidth/2) + 7;
+        const sliderBarPer = parseInt(Math.round(mouse/sliderWidth*100));
+        const result = forResult(sliderBarPer);
+        
+        setBarWidth(result);
+    }
+    const sliderMouseMove =(e)=>{
+        if(isClicked){
+            sliderMoving(e);
+        }
+    }
+
+    const sliderMouseDown =(e)=>{
+        sliderMoving(e);
+        setIsClicked(true);
+      }
+      
 
     return(
         <>
-            <SliderContainer ref={widthRef}>
-                <StateBox>
-                    <StateInput value={barWidth} /> %
-                </StateBox>
-                <SliderBox>
-                    <SliderBarBase 
-                        onMouseDown={e=>sliderClick(e)}
-                    >
-                        <SliderBar barWidth={barWidth}>
-                            <SliderSwitch>
-                                <SliderCircle />
-                            </SliderSwitch>
-                        </SliderBar>
-                    </SliderBarBase>
-                </SliderBox>
-            </SliderContainer>
+            <Container 
+                onMouseMove={e=>sliderMouseMove(e)}
+            >
+                <SliderContainer ref={widthRef}>
+                    <StateBox>
+                        <StateInput />{barWidth} %
+                    </StateBox>
+                    <SliderBox>
+                        <SliderBarBase
+                            onMouseDown={sliderMouseDown}
+                        >
+                            <SliderBar barWidth={barWidth}>
+                                <SliderSwitch>
+                                    <SliderCircle />
+                                </SliderSwitch>
+                            </SliderBar>
+                        </SliderBarBase>
+                    </SliderBox>
+                </SliderContainer>
+            </Container>
         </>
     )
 }
+
+const Container = styled.div`
+    width: 100%;
+`
+
 
 const SliderContainer = styled.div`
     width: 50%;
     margin: 0 auto;
 `
 
-const StateInput = styled.input.attrs({
-    readOnly: true,
-})`
+const StateInput = styled.div`
     display: inline-block;
-    width: 80%;
+    width: 78%;
     height: 30px;
     border: none;
     outline: none;
     background-color: #fafafa;
     text-align: right;
+    user-select: none;
 `
 
 const StateBox = styled.div`
@@ -61,13 +91,14 @@ const StateBox = styled.div`
     border: 1px solid #aaa;
     border-radius: 4px;
     line-height: 50px;
+    user-select: none;
 `
 
 const SliderBox = styled.div`
     display: block;
     width: 100%;
-    height: 60px;
-    line-height: 60px;
+    height: 90px;
+    line-height: 90px;
 `
 
 const SliderBarBase = styled.div`
