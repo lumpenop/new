@@ -39,8 +39,7 @@ const Dropdown = () =>{
                 return e.toLowerCase().includes(text.toLowerCase());
             })
             
-            setMenuList([AllSymbols, ...newList]);
-           
+            setMenuList([AllSymbols, ...newList]);           
         }
     }
     
