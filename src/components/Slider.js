@@ -1,15 +1,22 @@
-import React, {useState, useRef} from 'react';
+import React, {useState, useRef, useEffect} from 'react';
 import styled from 'styled-components';
+import { useSelector, useDispatch } from 'react-redux';
+import { setIsClicked } from '../actions/index';
 
 const arrPer = [
     1, 25, 50, 75, 100
 ]
 
-const Slider = ({isClicked, setIsClicked}) =>{
+const Slider = () =>{
+    const dispatch = useDispatch();
 
+    // useSelector는 한 번만 실행, 함수 내에서 사용 불가
+    let state = useSelector(state => state.reducer);
+
+    // useSelector로 가져온 값은 동적인 값이다
+    let {isClicked} = state; //
     const [barWidth, setBarWidth] = useState(30);
     const widthRef = useRef();
-
 
     const forResult =(result)=>{
         if(result<1){
@@ -29,6 +36,7 @@ const Slider = ({isClicked, setIsClicked}) =>{
         
         setBarWidth(result);
     }
+
     const sliderMouseMove =(e)=>{
         if(isClicked){
             sliderMoving(e);
@@ -37,7 +45,7 @@ const Slider = ({isClicked, setIsClicked}) =>{
 
     const sliderMouseDown =(e)=>{
         sliderMoving(e);
-        setIsClicked(true);
+        dispatch(setIsClicked(true));
       }
       
 
@@ -54,8 +62,9 @@ const Slider = ({isClicked, setIsClicked}) =>{
                         <SliderBarBase
                             onMouseDown={sliderMouseDown}
                         >
-                            {arrPer.map(e=>{
-                                return <SliderBaseCircle 
+                            {arrPer.map((e, i)=>{
+                                return <SliderBaseCircle
+                                        key={i} 
                                         per={e}
                                         className={`${ e<=barWidth ?'skyblue':''}`}
                                     />
@@ -68,8 +77,9 @@ const Slider = ({isClicked, setIsClicked}) =>{
                             
                         </SliderBarBase>
                       
-                        {arrPer.map(el=>{
+                        {arrPer.map((el, i)=>{
                             return <Button 
+                                    key={i}
                                     per={el} 
                                     value={`${el}%`}
                                     onClick={()=>setBarWidth(el)}
