@@ -149,11 +149,13 @@ window.outerWidth로 구하여 반으로 나눈 값과 이벤트가 발생할 �
 
 버튼이 중앙에 위치할 수 있도록 하였습니다. 
 
-    -> Code Sandbox와 같이 브라우저 내에 브라우저가 있는 경우  window 사이즈로 좌표를 구하는 것이 문제가 되는 것으로 확인되어 
+    -> Code Sandbox와 같이 브라우저 내에 브라우저가 있는 경우  기존 식을 사용하는 것이 문제가 되는 것으로 확인되어 
 
     getBoundingClientRect().left 를 사용하여 e.nativeEvent.pageX - (window.outerWidth/2 - (window.outerWidth/2 - 
     
     getBoundingClientRect().left)) 로 수정하였습니다
+    
+    document.body, clientX 등을 사용하는 방법도 고려하여 보았지만 html5 표준이 아니기 때문에 브라우저 별 좌표 값에 차이가 있는 것을 알게됐습니다.
 
 사용자 마우스의 자유로운 이동을 위해 함수와 state의 위치를 App.js로 옮겨 
 
