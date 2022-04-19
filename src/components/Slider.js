@@ -7,8 +7,8 @@ const arrPer = [
 
 const Slider = ({isClicked, setIsClicked}) =>{
 
-    const [barWidth, setBarWidth] = useState(30);
-    const widthRef = useRef();
+    const [barWidth, setBarWidth] = useState(1);
+    const barRef = useRef();
 
 
     const forResult =(result)=>{
@@ -21,12 +21,14 @@ const Slider = ({isClicked, setIsClicked}) =>{
         }
     }
     const sliderMoving =(e)=>{
-        const sliderWidth = widthRef.current.offsetWidth;
+
+        const sliderWidth = barRef.current.offsetWidth;
+        const sliderLeft = barRef.current.getBoundingClientRect().left;
         const mouseX = e.nativeEvent.pageX;
-        const mouse = mouseX - (window.outerWidth/2 - sliderWidth/2) + 7;
+        const mouse = mouseX - (window.outerWidth/2 - (window.outerWidth/2 - sliderLeft));
         const sliderBarPer = parseInt(Math.round(mouse/sliderWidth*100));
         const result = forResult(sliderBarPer);
-        
+    
         setBarWidth(result);
     }
     const sliderMouseMove =(e)=>{
@@ -46,7 +48,7 @@ const Slider = ({isClicked, setIsClicked}) =>{
             <Container 
                 onMouseMove={e=>sliderMouseMove(e)}
             >
-                <SliderContainer ref={widthRef}>
+                <SliderContainer ref={barRef}>
                     <StateBox>
                         <StateInput />{barWidth} %
                     </StateBox>
