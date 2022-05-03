@@ -11,12 +11,12 @@ const Input = () =>{
     const [isVisible, setIsVisible] = useState(false);
 
     const eyesClick = () =>{
-        isVisible?setIsVisible(false):setIsVisible(true);
+        setIsVisible(prev=>!prev);
     }
     
     const emailCheck = (e) =>{
         const mail = /^[0-9a-zA-Z]([-_\.]?[0-9a-zA-Z])*@[0-9a-zA-Z]([-_\.]?[0-9a-zA-Z])*\.[a-zA-Z]{2,3}$/;
-        mail.test(e.target.value)?setIsOk(true):setIsOk(false);
+        mail.test(e.target.value) ? setIsOk(true) : setIsOk(false);
     }
     return(
         <>
@@ -25,7 +25,7 @@ const Input = () =>{
             <InputBox>
                 <Email onChange={emailCheck} />
                 <FontAwesomeIcon 
-                    className={`${isOk?'checkIcon ok':'checkIcon'}`} 
+                    className={isOk?'checkIcon ok':'checkIcon'} 
                     icon={faCheck} 
                 />
             </InputBox>
@@ -34,7 +34,7 @@ const Input = () =>{
                 <input 
                     placeholder="Password"
                     className="password"
-                    type={`${isVisible?'text':'password'}`} 
+                    type={isVisible?'text':'password'} 
                 />
                 <FontAwesomeIcon 
                     onClick={eyesClick}

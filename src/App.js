@@ -4,21 +4,22 @@ import Input from "./components/Input";
 import Slider from "./components/Slider";
 import Tab from "./components/Tab";
 import Toggle from "./components/Toggle";
+import React from 'react';
 
-import React, {useState} from 'react';
-
+import { useDispatch} from 'react-redux'
+import { setIsClicked } from './actions/index';
 
 function App() {
+  const dispatch = useDispatch();
+  const sliderMouseUp =()=>{
+    dispatch(setIsClicked(false));
 
-  const [isClicked, setIsClicked] = useState(false);
-  const sliderMouseUp =(e)=>{
-    setIsClicked(false);
 }
   
   
   return (
     <>
-      <div onMouseUp={e=>sliderMouseUp(e)}>
+      <div onMouseUp={e=>sliderMouseUp()}>
         <Section>
             <h3>Toggle</h3>
             <Toggle />
@@ -37,9 +38,7 @@ function App() {
         </Section>
         <Section>
           <h3>Slider</h3>
-          <Slider setIsClicked={setIsClicked} 
-            isClicked={isClicked}
-          />
+          <Slider />
         </Section>
       </div>
     </>
