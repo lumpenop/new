@@ -10,13 +10,10 @@ const arrPer = [
 const Slider = () =>{
     const dispatch = useDispatch();
 
-    // useSelector는 한 번만 실행, 함수 내에서 사용 불가
-    let state = useSelector(state => state.reducer);
 
-    // useSelector로 가져온 값은 동적인 값이다
-    let {isClicked} = state; 
-    const [barWidth, setBarWidth] = useState(30);
-    const widthRef = useRef();
+
+    const [barWidth, setBarWidth] = useState(1);
+    const barRef = useRef();
 
     const forResult =(result)=>{
         if(result<1){
@@ -28,12 +25,14 @@ const Slider = () =>{
         }
     }
     const sliderMoving =(e)=>{
-        const sliderWidth = widthRef.current.offsetWidth;
+
+        const sliderWidth = barRef.current.offsetWidth;
+        const sliderLeft = barRef.current.getBoundingClientRect().left;
         const mouseX = e.nativeEvent.pageX;
-        const mouse = mouseX - (window.outerWidth/2 - sliderWidth/2) + 7;
+        const mouse = mouseX - (window.outerWidth/2 - (window.outerWidth/2 - sliderLeft));
         const sliderBarPer = parseInt(Math.round(mouse/sliderWidth*100));
         const result = forResult(sliderBarPer);
-        
+    
         setBarWidth(result);
     }
 
@@ -54,7 +53,7 @@ const Slider = () =>{
             <Container 
                 onMouseMove={e=>sliderMouseMove(e)}
             >
-                <SliderContainer ref={widthRef}>
+                <SliderContainer ref={barRef}>
                     <StateBox>
                         <StateInput />{barWidth} %
                     </StateBox>
