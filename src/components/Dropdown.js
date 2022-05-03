@@ -36,7 +36,7 @@ const Dropdown = () =>{
             const anotherMenu = menuList.slice(1);
 
             const newList = anotherMenu.filter(e=>{
-                return e.toLowerCase().includes(text.toLowerCase());
+                return e.includes(text.toUpperCase());
             })
             
             setMenuList([AllSymbols, ...newList]);           

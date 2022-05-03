@@ -10,8 +10,6 @@ const arrPer = [
 const Slider = () =>{
     const dispatch = useDispatch();
 
-
-
     const [barWidth, setBarWidth] = useState(1);
     const barRef = useRef();
 
