@@ -6,24 +6,28 @@ const Toggle = () =>{
     const [clicked, setClicked] = useState(false);
 
     const toggleHandler = () =>{
-        clicked ? setClicked(false) : setClicked(true);
+       setClicked(prev => !prev);
     }
     return(
         <>
             <ToggleContainer 
                 onClick={toggleHandler}
             >
+                <ToggleSwitchBox>
                 <ToggleSwitch 
-                    className={`${clicked ? 'toggle--checked' : ''}`}
+                    className={clicked ? 'toggle--checked' : ''}
                 />
-                <ToggleTextBox>
-                <ToggleText
-                    className={`${clicked ? 'toggle--checked' : ''}`}
-                >기본</ToggleText>
-                <ToggleText
-                    className={`${!clicked ? 'toggle--checked' : ''}`}
-                >상세</ToggleText>
-                </ToggleTextBox>
+                
+                    <ToggleTextBox>
+                    
+                    <ToggleText
+                        className={clicked ? 'toggle--checked' : ''}
+                    >기본</ToggleText>
+                    <ToggleText
+                        className={!clicked ? 'toggle--checked' : ''}
+                    >상세</ToggleText>
+                    </ToggleTextBox>
+                </ToggleSwitchBox>
             </ToggleContainer>
         </>
     )
@@ -32,6 +36,7 @@ const Toggle = () =>{
 const ToggleTextBox = styled.ul`
     text-align: center;
     position: absolute;
+    top: 0;
     width: 100%;
     height: 30px;
     display: flex;
@@ -44,7 +49,6 @@ const ToggleText = styled.li`
     line-height: 30px;
     cursor: pointer;
     user-select: none;
-
     &.toggle--checked{
         opacity: 0.4;
     }
@@ -52,7 +56,6 @@ const ToggleText = styled.li`
 `
 
 const ToggleContainer = styled.div`
-    position: relative;
     margin: 0 auto;
     width: 180px;
     height: 30px;
@@ -60,21 +63,27 @@ const ToggleContainer = styled.div`
     border-radius: 15px;
     cursor: pointer;
 `
+const ToggleSwitchBox = styled.div`
+    width: 180px;
+    height: 30px;
+    padding: 0 2%;
+    position: relative;
+    box-sizing: border-box;
+`
 const ToggleSwitch = styled.div`
-    position: absolute;
+    position: relative;
     top: 50%;
     transform: translateY(-50%);
-    left: 2%;
+    left: 0;
     width: 50%;
     height: 80%;
     background-color: white;
     border-radius: 15px;
     transition: 0.5s;
    
-
     &.toggle--checked{
-        left: 48%;
-        transition: 0.5s;
+        left: 50%;
+        transition: 0.3s;
     }
 `
 

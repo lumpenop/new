@@ -20,7 +20,7 @@ const Dropdown = () =>{
     const [menuList, setMenuList] = useState(dropMenus);
 
     const clickSelect = () =>{
-        isOn? setIsOn(false): setIsOn(true);
+        setIsOn(prev=>!prev);
     }
 
     const clickMenu = (idx) =>{
@@ -36,7 +36,7 @@ const Dropdown = () =>{
             const anotherMenu = menuList.slice(1);
 
             const newList = anotherMenu.filter(e=>{
-                return e.toLowerCase().includes(text.toLowerCase());
+                return e.includes(text.toUpperCase());
             })
             
             setMenuList([AllSymbols, ...newList]);           
@@ -53,10 +53,10 @@ const Dropdown = () =>{
                 />
                 <FontAwesomeIcon className='caretDown' icon={faCaretDown} />
                 <OptionBox 
-                    className={`${isOn? 'on' : ''}`}
+                    className={isOn? 'on' : ''}
                 >
                     <Option>
-                        <Serch onChange={e=>autocomplete(e.target.value)} /> 
+                        <Serch onChange={e=>autocomplete(e.currentTarget.value)} /> 
                     </Option>
                     {menuList.map((e,i)=>{
                         return <Option
