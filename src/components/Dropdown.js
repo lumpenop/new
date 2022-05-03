@@ -53,7 +53,7 @@ const Dropdown = () =>{
                 />
                 <FontAwesomeIcon className='caretDown' icon={faCaretDown} />
                 <OptionBox 
-                    className={isOn &&'on'}
+                    className={isOn ? 'on': ''}
                 >
                     <Option>
                         <Serch onChange={e=>autocomplete(e.target.value)} /> 
