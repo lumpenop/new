@@ -3,10 +3,10 @@ import styled from 'styled-components';
 
 
 const Toggle = () =>{
-    const [clicked, setClicked] = useState(false);
+    const [isClicked, setIsClicked] = useState(false);
 
     const toggleHandler = () =>{
-        clicked ? setClicked(false) : setClicked(true);
+        setIsClicked(prev=>!prev);
     }
     return(
         <>
@@ -14,14 +14,14 @@ const Toggle = () =>{
                 onClick={toggleHandler}
             >
                 <ToggleSwitch 
-                    className={`${clicked ? 'toggle--checked' : ''}`}
+                    className={isClicked && 'toggle--checked' }
                 />
                 <ToggleTextBox>
                 <ToggleText
-                    className={`${clicked ? 'toggle--checked' : ''}`}
+                    className={isClicked && 'toggle--checked'}
                 >기본</ToggleText>
                 <ToggleText
-                    className={`${!clicked ? 'toggle--checked' : ''}`}
+                    className={!isClicked && 'toggle--checked'}
                 >상세</ToggleText>
                 </ToggleTextBox>
             </ToggleContainer>

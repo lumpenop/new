@@ -14,7 +14,7 @@ const Slider = () =>{
     let state = useSelector(state => state.reducer);
 
     // useSelector로 가져온 값은 동적인 값이다
-    let {isClicked} = state; //
+    let {isClicked} = state; 
     const [barWidth, setBarWidth] = useState(30);
     const widthRef = useRef();
 
@@ -66,7 +66,7 @@ const Slider = () =>{
                                 return <SliderBaseCircle
                                         key={i} 
                                         per={e}
-                                        className={`${ e<=barWidth ?'skyblue':''}`}
+                                        className={e<=barWidth ?'skyblue':''}
                                     />
                             })}
                             <SliderBar barWidth={barWidth}>
@@ -81,7 +81,7 @@ const Slider = () =>{
                             return <Button 
                                     key={i}
                                     per={el} 
-                                    value={`${el}%`}
+                                    value={{el}+'%'}
                                     onClick={()=>setBarWidth(el)}
                                 />
                         })}

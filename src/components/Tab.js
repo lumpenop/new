@@ -17,7 +17,7 @@ const Tab = () =>{
                 {food.map((e, i)=>{
                     return <TabLi key={i}
                         onClick={()=>Clicked(i)}
-                        className={`${i===liIndex ? "focused" : ""}`} 
+                        className={i===liIndex ? "focused" : ""} 
                     >{e}</TabLi>
                 })}
                 </TabContainer> 
